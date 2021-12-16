@@ -217,18 +217,74 @@
 
 // export default FAQScreen;
 
-import React, {Component} from 'react';
-import {View, Image, Text, StyleSheet, Dimensions} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import ReactNativeZoomableView from '@openspacelabs/react-native-zoomable-view/src/ReactNativeZoomableView';
+const FAQScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Text>ReactNativeZoomableView</Text>
 
-export default class FAQScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Text> textInComponent </Text>
+      <View
+        style={{
+          borderWidth: 5,
+          flexShrink: 1,
+          height: 500,
+          width: 310,
+          position: 'absolute',
+          // zIndex: 99,
+        }}>
+        <ReactNativeZoomableView
+          maxZoom={30}
+          // Give these to the zoomable view so it can apply the boundaries around the actual content.
+          // Need to make sure the content is actually centered and the width and height are
+          // dimensions when it's rendered naturally. Not the intrinsic size.
+          // For example, an image with an intrinsic size of 400x200 will be rendered as 300x150 in this case.
+          // Therefore, we'll feed the zoomable view the 300x150 size.
+          contentWidth={300}
+          contentHeight={150}>
+          <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'contain',
+            }}
+            source={{uri: 'https://via.placeholder.com/400x200.png'}}
+          />
+        </ReactNativeZoomableView>
       </View>
-    );
-  }
-}
+      <View style={{height: 500, width: 310}}>
+        <Image
+          style={{
+            width: '100%',
+            height: '100%',
+            resizeMode: 'contain',
+            position: 'absolute',
+            zIndex: 999,
+          }}
+          source={{
+            uri: 'https://images.ctfassets.net/hrltx12pl8hq/61DiwECVps74bWazF88Cy9/2cc9411d050b8ca50530cf97b3e51c96/Image_Cover.jpg?fit=fill&w=480&h=270',
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+
+export default FAQScreen;
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // padding: 20,
+  },
+  box: {
+    width: 60,
+    height: 60,
+    marginVertical: 20,
+  },
+});
 
 // import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
